@@ -8,7 +8,8 @@ const toDo = new ToDo;
 
 
 app.get('/api/home', (req, res) => {
-    toDo.t()
+    console.log(req.params.content)
+    //toDo.saveTodo(req.params.content);
     res.send("works");
 })
 
