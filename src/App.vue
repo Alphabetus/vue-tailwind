@@ -1,9 +1,11 @@
 <template>
-  <div id="nav">
+<!--  <div id="nav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div>
-  <router-view />
+  <router-view />-->
+
+  <Header />
 </template>
 
 <style lang="scss">
@@ -28,3 +30,13 @@
   }
 }
 </style>
+
+
+<script>
+import Header from "@/components/Header.vue";
+export default {
+  components: {
+    Header
+  }
+}
+</script>
