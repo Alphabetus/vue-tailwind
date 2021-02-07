@@ -46,12 +46,12 @@ export default {
         console.log("new todo request sent");
         this.updateList();
       })
-      this.$emit("newTodo");
       this.content = null;
     },
     updateList() {
       axios.post('http://localhost:3000/api/get')
       .then((res) => {
+        console.log("deu update");
         this.list = res.data;
       })
     }

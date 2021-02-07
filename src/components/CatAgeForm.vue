@@ -15,7 +15,7 @@
             </select>
 
             <label for="age">Enter the age of your cat</label>
-            <input id="age" class="w-full" v-model="age" placeholder="Enter your Cat's age">
+            <input id="age" type="number" class="w-full" v-model="age" placeholder="Enter your Cat's age">
 
             <div class="mt-3">
               <button @click="sendAge()" class="bg-green-400 border border-green-500 p-2">Calculate</button>
