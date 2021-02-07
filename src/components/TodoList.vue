@@ -57,10 +57,7 @@ export default {
     }
   },
   mounted() {
-    axios.post('http://localhost:3000/api/get')
-    .then((res) => {
-      this.list = res.data;
-    });
+    this.updateList();
   }
 }
 </script>
