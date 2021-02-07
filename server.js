@@ -28,9 +28,9 @@ app.post("/api/get", async (req, res) => {
   await res.send(todos);
 });
 
-app.post('/api/post', (req, res) => {
+app.post('/api/post', async (req, res) => {
   const q = db.sendQuery(`INSERT INTO todo (content) VALUES ('${req.body.content}')`);
-  res.send(true);
+  await res.send(q);
 })
 
 app.post('/api/delete', async (req, res) => {
