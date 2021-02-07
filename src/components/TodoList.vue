@@ -40,7 +40,7 @@ export default {
     },
 
     getList() {
-      axios.post('http://home.alphawebmaker.com:3000/api/get')
+      axios.post('http://localhost:3000/api/get')
       .then(function (res){
         console.log(res);
       })
