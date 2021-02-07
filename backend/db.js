@@ -22,4 +22,21 @@ module.exports.DB = class MySQL {
 
         return data;
     }
+
+    getTodos() {
+        const connection = this.mysql.createConnection(this.details);
+        const data = [];
+        var resultArray;
+
+        connection.connect();
+        console.log("yo")
+        connection.query("SELECT * FROM todo", function (error, result, fields) {
+            var resultArray = Object.values(JSON.parse(JSON.stringify(result)))
+            console.log(1)
+            console.log(resultArray)
+        });
+        console.log(resultArray)
+        connection.end();
+        return data;
+    }
 }

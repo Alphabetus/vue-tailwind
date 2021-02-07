@@ -15,7 +15,7 @@
         </div>
 
         <div class="link">
-          Not Yet
+          <router-link :to="{name: 'Payload'}" class="nav-link">Todo List</router-link>
         </div>
       </div>
       <!-- sign -->
