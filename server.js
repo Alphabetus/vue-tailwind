@@ -28,6 +28,7 @@ app.post("/api/get", async (req, res) => {
   const db = new Db();
   const yo = await db.getAll();
   await console.log(yo);
+  await res.send(yo);
 });
 
 app.listen(port, () => {
