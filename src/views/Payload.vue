@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     updateTodos() {
-      console.log("event triggered");
     }
   }
 }

@@ -18,7 +18,7 @@
       <h3 class="font-bold">Workload List</h3>
       <div v-for="todo in list" v-bind:key="todo.id">
         <!-- pass component -->
-        <TodoEntry :todo="todo"/>
+        <TodoEntry :todo="todo" @remove-todo="removeTodo"/>
       </div>
     </div>
 
@@ -37,14 +37,16 @@ export default {
   data: function() {
     return {
       content: null,
-      list: []
+      list: [],
+      isDeleted: false
     }
   },
   methods: {
     newTodo() {
+      console.log("new todo");
       axios.post('http://localhost:3000/api/post', { content: this.content })
       .then(() => {
-        console.log("new todo request sent");
+        console.log("yooo");
         this.updateList();
       })
       this.content = null;
@@ -52,7 +54,7 @@ export default {
     updateList() {
       axios.post('http://localhost:3000/api/get')
       .then((res) => {
-        console.log("deu update");
+        console.log("list updated");
         this.list = res.data;
       })
     },
@@ -60,6 +62,15 @@ export default {
       if (event.keyCode === 13) {
         this.newTodo();
       }
+    },
+    removeTodo(id) {
+      this.cleanUpTodo(id);
+      axios.post('http://localhost:3000/api/delete', { id: id });
+    },
+    cleanUpTodo(id) {
+      const idValidator = (el) => el.id === id;
+      const indexToDelete = this.list.findIndex(idValidator);
+      this.list.splice(indexToDelete, 1);
     }
   },
   mounted() {

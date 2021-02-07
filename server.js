@@ -29,14 +29,19 @@ app.get("/api/home", (req, res) => {
 });
 
 app.post("/api/get", async (req, res) => {
-  const yo = await db.getAll();
-  await res.send(yo);
+  const todos = await db.getAll();
+  await res.send(todos);
 });
 
-app.post('/api/post', async (req, res) => {
-  db.sendQuery(`INSERT INTO todo (content) VALUES ('${req.body.content}')`);
+app.post('/api/post', (req, res) => {
+  const q = db.sendQuery(`INSERT INTO todo (content) VALUES ('${req.body.content}')`);
   res.send(true);
 })
+
+app.post('/api/delete', async (req, res) => {
+  const q = await db.deleteTodo(req.body.id);
+  await res.send(q);
+});
 
 app.listen(port, () => {
   console.log("Node server running on port :" + port);

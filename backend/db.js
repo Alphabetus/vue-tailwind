@@ -15,16 +15,22 @@ module.exports.DB = class MySQL {
     return new Promise((resolve, reject) => {
       this.pool.query(query, function(err, rows, fields) {
         if (err) throw err;
-        console.log(rows);
+        resolve(true);
       });
     });
   }
 
   getAll() {
-    // eslint-disable-next-line no-unused-vars
     return new Promise((resolve, reject) => {
-      // eslint-disable-next-line no-unused-vars
       this.pool.query("SELECT * FROM todo", function(error, result, fields){
+        resolve(result);
+      });
+    });
+  }
+
+  deleteTodo(id) {
+    return new Promise((resolve, reject) => {
+      this.pool.query(`DELETE FROM todo WHERE id=${id}`, function(error, result, fields){
         resolve(result);
       });
     });
