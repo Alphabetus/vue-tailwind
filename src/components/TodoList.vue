@@ -15,7 +15,10 @@
 
     <div class="py-4">
       <h3 class="font-bold">Workload List</h3>
-      <div>{{ list }}</div>
+      <div v-for="todo in list" v-bind:key="todo.id">
+        <!-- pass component -->
+        <TodoEntry :todo="todo"/>
+      </div>
     </div>
 
   </div>
@@ -24,13 +27,17 @@
 
 <script>
 const axios = require('axios');
+
+import TodoEntry from "./TodoEntry";
 export default {
   name: "TodoList",
+  components: {
+    TodoEntry
+  },
   data: function() {
-    const list = this.getList()
     return {
       content: null,
-      list: list
+      list: []
     }
   },
   methods: {
@@ -42,9 +49,13 @@ export default {
     getList() {
       axios.post('http://localhost:3000/api/get')
       .then(function (res){
-        console.log(res);
+        return res.data;
       })
     }
+  },
+  mounted() {
+    axios.post('http://localhost:3000/api/get')
+    .then(res => (this.list = res.data));
   }
 }
 </script>
