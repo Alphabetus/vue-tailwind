@@ -7,9 +7,10 @@
         <input
             class="w-8/12 border border-blue-300 p-1 rounded-l inline-block border-r-0"
             v-model="content"
-            placeholder="What do you have in mind?">
+            placeholder="What do you have in mind?"
+            v-on:keydown="checkForEnter">
 
-        <button class="w-3/12 border border-blue-300 border-l-0 rounded-r inline-block p-1" @click="newTodo">OK</button>
+        <button class="w-3/12 border border-blue-300 rounded-r inline-block p-1 bg-blue-300" @click="newTodo">Add</button>
       </div>
     </div>
 
@@ -54,6 +55,11 @@ export default {
         console.log("deu update");
         this.list = res.data;
       })
+    },
+    checkForEnter(event) {
+      if (event.keyCode === 13) {
+        this.newTodo();
+      }
     }
   },
   mounted() {
