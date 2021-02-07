@@ -37,12 +37,12 @@ export default {
   ,
   methods: {
     completeTodo(id) {
-      axios.post('http://localhost:3000/api/delete', { id: id })
+      axios.post( process.env.VUE_APP_APIBASE + '/api/delete', { id: id })
       this.isDeleted = true;
       const ctx = this;
       setTimeout(function(){
         ctx.$emit('remove-todo', id);
-      }, 750);
+      }, 2500);
     }
   }
 }

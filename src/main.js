@@ -18,3 +18,6 @@ app.use(router);
 app.mount('#app');
 
 global.app = app;
+
+console.log("Vue app started on Port :8080");
+console.log("Connecting to API base url on " + process.env.VUE_APP_APIBASE);

@@ -44,7 +44,7 @@ export default {
   methods: {
     newTodo() {
       console.log("new todo");
-      axios.post('http://localhost:3000/api/post', { content: this.content })
+      axios.post(process.env.VUE_APP_APIBASE + '/api/post', { content: this.content })
       .then(() => {
         console.log("yooo");
         this.updateList();
@@ -52,7 +52,7 @@ export default {
       this.content = null;
     },
     updateList() {
-      axios.post('http://localhost:3000/api/get')
+      axios.post(process.env.VUE_APP_APIBASE + '/api/get')
       .then((res) => {
         console.log("list updated");
         this.list = res.data;
@@ -65,7 +65,7 @@ export default {
     },
     removeTodo(id) {
       this.cleanUpTodo(id);
-      axios.post('http://localhost:3000/api/delete', { id: id });
+      axios.post(process.env.VUE_APP_APIBASE + '/api/delete', { id: id });
     },
     cleanUpTodo(id) {
       const idValidator = (el) => el.id === id;

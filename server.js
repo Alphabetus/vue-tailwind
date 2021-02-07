@@ -2,11 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const port = process.env.port || 3000;
-const ToDo = require("./backend/ToDo.js").ToDo;
-const toDo = new ToDo();
-// eslint-disable-next-line no-unused-vars
-const axios = require("axios");
+const port = process.env.SERVER_PORT || 3000;
 const Db = require("./backend/db.js").DB;
 const bodyParser = require("body-parser");
 const db = new Db();
@@ -24,7 +20,6 @@ app.use(function(req, res, next) {
 });
 
 app.get("/api/home", (req, res) => {
-  // db.sendQuery("INSERT INTO todo (content) VALUES ('lololo')");
   res.send("works");
 });
 
