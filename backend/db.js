@@ -5,32 +5,26 @@ module.exports.DB = class MySQL {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
-      database: process.env.DB_NAME
+      database: process.env.DB_NAME,
+      connectionLimit: 10
     };
+    this.pool = this.mysql.createPool(this.details)
   }
 
   sendQuery(query) {
-    const connection = this.mysql.createConnection(this.details);
-    let data;
-
-    connection.connect();
-    // eslint-disable-next-line no-unused-vars
-    connection.query(query, function(error, results, fields) {
-      if (error) throw error;
-      data = results;
+    return new Promise((resolve, reject) => {
+      this.pool.query(query, function(err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+      });
     });
-    connection.end();
-
-    return data;
   }
 
   getAll() {
-    const connection = this.mysql.createConnection(this.details);
-
     // eslint-disable-next-line no-unused-vars
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line no-unused-vars
-      connection.query("SELECT * FROM todo", function(error, result, fields){
+      this.pool.query("SELECT * FROM todo", function(error, result, fields){
         resolve(result);
       });
     });

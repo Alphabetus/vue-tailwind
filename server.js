@@ -9,6 +9,7 @@ const toDo = new ToDo();
 const axios = require("axios");
 const Db = require("./backend/db.js").DB;
 const bodyParser = require("body-parser");
+const db = new Db();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -23,18 +24,16 @@ app.use(function(req, res, next) {
 });
 
 app.get("/api/home", (req, res) => {
-  //toDo.saveTodo(req.params.content);
+  // db.sendQuery("INSERT INTO todo (content) VALUES ('lololo')");
   res.send("works");
 });
 
 app.post("/api/get", async (req, res) => {
-  const db = new Db();
   const yo = await db.getAll();
   await res.send(yo);
 });
 
 app.post('/api/post', async (req, res) => {
-  const db = new Db();
   db.sendQuery(`INSERT INTO todo (content) VALUES ('${req.body.content}')`);
   res.send(true);
 })
