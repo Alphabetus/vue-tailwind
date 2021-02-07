@@ -29,7 +29,7 @@ app.post("/api/get", async (req, res) => {
 });
 
 app.post('/api/post', async (req, res) => {
-  const q = db.sendQuery(`INSERT INTO todo (content) VALUES ('${req.body.content}')`);
+  const q = await db.sendQuery(`INSERT INTO todo (content) VALUES ('${req.body.content}')`);
   await res.send(q);
 })
 
