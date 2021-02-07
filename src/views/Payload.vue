@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     updateTodos() {
-      this.$refs.todoList.content="123"
+      console.log("event triggered");
     }
   }
 }

@@ -27,8 +27,9 @@ module.exports.DB = class MySQL {
   getAll() {
     const connection = this.mysql.createConnection(this.details);
 
-
+    // eslint-disable-next-line no-unused-vars
     return new Promise((resolve, reject) => {
+      // eslint-disable-next-line no-unused-vars
       connection.query("SELECT * FROM todo", function(error, result, fields){
         resolve(result);
       });

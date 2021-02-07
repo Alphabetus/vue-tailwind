@@ -8,6 +8,10 @@ const toDo = new ToDo();
 // eslint-disable-next-line no-unused-vars
 const axios = require("axios");
 const Db = require("./backend/db.js").DB;
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // unsafe sex with internet
@@ -19,7 +23,6 @@ app.use(function(req, res, next) {
 });
 
 app.get("/api/home", (req, res) => {
-  console.log(req.params.content);
   //toDo.saveTodo(req.params.content);
   res.send("works");
 });
@@ -27,9 +30,14 @@ app.get("/api/home", (req, res) => {
 app.post("/api/get", async (req, res) => {
   const db = new Db();
   const yo = await db.getAll();
-  await console.log(yo);
   await res.send(yo);
 });
+
+app.post('/api/post', async (req, res) => {
+  const db = new Db();
+  db.sendQuery(`INSERT INTO todo (content) VALUES ('${req.body.content}')`);
+  res.send(true);
+})
 
 app.listen(port, () => {
   console.log("Node server running on port :" + port);

@@ -27,7 +27,6 @@
 
 <script>
 const axios = require('axios');
-
 import TodoEntry from "./TodoEntry";
 export default {
   name: "TodoList",
@@ -42,20 +41,26 @@ export default {
   },
   methods: {
     newTodo() {
+      axios.post('http://localhost:3000/api/post', { content: this.content })
+      .then(() => {
+        console.log("new todo request sent");
+        this.updateList();
+      })
       this.$emit("newTodo");
       this.content = null;
     },
-
-    getList() {
+    updateList() {
       axios.post('http://localhost:3000/api/get')
-      .then(function (res){
-        return res.data;
+      .then((res) => {
+        this.list = res.data;
       })
     }
   },
   mounted() {
     axios.post('http://localhost:3000/api/get')
-    .then(res => (this.list = res.data));
+    .then((res) => {
+      this.list = res.data;
+    });
   }
 }
 </script>
