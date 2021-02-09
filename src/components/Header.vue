@@ -17,6 +17,10 @@
         <div class="link">
           <router-link :to="{name: 'Payload'}" class="nav-link">Todo List</router-link>
         </div>
+
+        <div class="link">
+          <router-link :to="{name: 'chat'}" class="nav-link">Chat</router-link>
+        </div>
       </div>
       <!-- sign -->
       <div class="self-center text-xs"><a href="//alphawebmaker.com/" target="_blank">@alphabetus</a></div>

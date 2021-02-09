@@ -18,6 +18,11 @@ const routes = [
     path: "/payload-handling",
     name: "Payload",
     component: Payload
+  },
+  {
+    path: "/chat",
+    name: "chat",
+    component: () => import("../views/Chat")
   }
 ];
 

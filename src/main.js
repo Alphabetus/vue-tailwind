@@ -6,18 +6,20 @@ import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
 
-/*createApp(App)
-  .use(store)
-  .use(router)
-  .mount("#app");*/
 
+import VueSocketIOExt from 'vue-socket.io-extended';
+import io  from 'socket.io-client';
 
+const socket = io('http://localhost:3001');
 const app = createApp(App);
+
 app.use(store);
 app.use(router);
-app.mount('#app');
+app.use(VueSocketIOExt, socket)
+global.socket = socket;
 
-global.app = app;
+
+app.mount('#app');
 
 console.log("Vue app started on Port :8080");
 console.log("Connecting to API base url on " + process.env.VUE_APP_APIBASE);
