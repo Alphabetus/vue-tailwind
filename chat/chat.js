@@ -11,12 +11,12 @@ const connectedClients = new Set()
 server.listen(3001);
 
 
-// connect & disconnect disclaimer for testing
+
 io.on('connection', (socket) => {
   connectedClients.add(socket) // adds connected client to Set for later analysis
   console.log("User connected on socket: " + socket.id);
   socket.once('disconnect', function(){
-    connectedClients.delete(socket)
+    connectedClients.delete(socket) // removes client from Set for later analysis 
     console.log("User disconnected from socket: " + socket.id);
   })
 
